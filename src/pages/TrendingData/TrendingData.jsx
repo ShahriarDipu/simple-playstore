@@ -10,7 +10,7 @@ export const TrendingData = () => {
  console.log(topData)
   return (
     <>
-    <div className='mt-10'>
+    <div className='my-10'>
       <div className='flex text-2xl md:text-5xl font-bold justify-center'>
             <p >
               Trending Apps  
@@ -22,7 +22,10 @@ export const TrendingData = () => {
             <p>Explore All Trending Apps on the Market developed by us</p>
           </div>
     </div>
-<div className=' w-15/17 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 my-15 '>
+
+
+
+<div className='w-15/17 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-x-6 gap-y-10 place-items-center '>
 {
     topData.map(topData=>(<AppCard topData={topData}></AppCard>))
 }
@@ -30,7 +33,7 @@ export const TrendingData = () => {
  
  
 </div>
-<div className="w-11/12 mx-auto flex justify-center mb-10 ">
+<div className="w-11/12 mx-auto flex justify-center my-10 ">
   <Link to="Apps" className="btn">Show All</Link>
 </div>
 

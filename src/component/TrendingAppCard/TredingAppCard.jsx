@@ -16,23 +16,21 @@ export const AppCard = ({topData}) => {
 
   return (
    <Link to="Apps">
-    <div>
-        <div className="card  bg-base-100 w-96 shadow-sm h-100">
-  <figure>
+       <div className="card w-72 bg-white shadow-md rounded-xl overflow-hidden cursor-pointer transition hover:shadow-lg">
+  <figure className="h-52 w-full bg-gray-50 flex items-center justify-center">
     {imageSrc ? (
-            <img src={imageSrc} alt={title} />
-          ) : (
-            <div className="w-full h-40 bg-gray-200 animate-pulse rounded-xl"></div>
-          )}
-
+      <img
+        src={imageSrc}
+        alt={title}
+        className="h-full w-full object-cover"
+      />
+    ) : (
+      <div className="w-full h-full bg-gray-200 animate-pulse rounded-xl"></div>
+    )}
   </figure>
-  <div className="card-body">
-    <h2 className="card-title">
-      {title}
-      <div className="badge badge-secondary">NEW</div>
-    </h2>
 
-     <div className="p-4">
+  <div className="p-4">
+    <h2 className="text-md font-semibold leading-tight">{title}</h2>
 
     <div className="flex justify-between items-center mt-3 text-sm">
       <span className="flex items-center gap-1 text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
@@ -58,9 +56,7 @@ export const AppCard = ({topData}) => {
       </span>
     </div>
   </div>
-  </div>
 </div>
-    </div>
    </Link>
   )
 }

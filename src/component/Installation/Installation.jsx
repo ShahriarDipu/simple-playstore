@@ -4,7 +4,7 @@ import { AppContext } from "../../context/AppContext";
 export const Installation = () => {
   const { localItem, uninstallApp } = use(AppContext);
 
-  const [sortBy, setSortBy] = useState(""); // sort option
+  const [sortBy, setSortBy] = useState(""); 
 
   if (!localItem || localItem.length === 0) {
     return (
@@ -14,18 +14,18 @@ export const Installation = () => {
     );
   }
 
-  // 🔥 SORT LOGIC
+
   const sortedApps = [...localItem].sort((a, b) => {
-    if (sortBy === "high-low") return b.downloads - a.downloads; // DESCENDING
-    if (sortBy === "low-high") return a.downloads - b.downloads; // ASCENDING
-    return 0; // default (no sort)
+    if (sortBy === "high-low") return b.downloads - a.downloads; 
+    if (sortBy === "low-high") return a.downloads - b.downloads; 
+    return 0;
   });
 
   return (
-    <div className="w-10/12 mx-auto mt-10">
+    <div className="w-10/12 mx-auto my-10">
       <h1 className="text-3xl font-semibold mb-6">Installed Apps</h1>
 
-      {/* 🔥 SORT DROPDOWN */}
+
       <div className="mb-6 flex justify-end">
         <select
           value={sortBy}

@@ -4,28 +4,43 @@ import { AppsCard } from '../AppsCard/AppsCard';
 
 
 export const Apps = () => {
-  const { showData } = use(AppContext);
-  const [searchText, setSearchText] = useState("");
-  const [loading, setLoading]=useState(true)
+   const { showData } = useContext(AppContext);
 
-    useEffect(() => {
+  const [searchText, setSearchText] = useState("");
+  const [filteredApps, setFilteredApps] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
     if (showData) {
       const timer = setTimeout(() => {
+        setFilteredApps(showData);
         setLoading(false);
-      }, 1000); 
+      }, 1500); 
 
-      return () => clearTimeout(timer); 
+      return () => clearTimeout(timer);
     }
   }, [showData]);
 
-  // Filter apps based on search text
-  const filteredApps = showData.filter(app =>
-    app.title.toLowerCase().includes(searchText.toLowerCase())
-    
-  );
- 
 
-   if (loading) {
+  useEffect(() => {
+    if (!showData) return;
+
+    setLoading(true);
+
+    const timer = setTimeout(() => {
+      const result = showData.filter((app) =>
+        app.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+
+      setFilteredApps(result);
+      setLoading(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchText, showData]);
+
+
+  if (loading) {
     return (
       <div className="min-h-[60vh] flex justify-center items-center">
         <span className="loading loading-spinner loading-xl"></span>
@@ -36,7 +51,6 @@ export const Apps = () => {
   return (
     <div className='w-15/17 mx-auto my-10'>
 
-      {/* Search Input */}
       <div className='mb-6 flex justify-center'>
         <input
           type="text"
@@ -47,7 +61,7 @@ export const Apps = () => {
         />
       </div>
 
-      {/* Apps Grid */}
+
    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-x-6 gap-y-10 place-items-center">
 
         {filteredApps.map((app) => (
@@ -55,7 +69,7 @@ export const Apps = () => {
         ))}
       </div>
 
-      {/* No Results Found */}
+   
       {filteredApps.length === 0 && (
         <p className="text-center text-gray-500 mt-10">
           No apps found.

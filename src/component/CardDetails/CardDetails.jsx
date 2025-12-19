@@ -93,7 +93,7 @@ const alreadyInstalled = localItem.some(a => a.id === item.id);
             <div className="w-full h-40 bg-gray-200 animate-pulse rounded-xl"></div>
           )}
 
-        {/* App Info */}
+    
         <div className="flex-1">
           <h1 className="text-3xl font-semibold">{showCard.title}</h1>
           <p className="text-sm text-gray-500 mt-1">
@@ -101,7 +101,7 @@ const alreadyInstalled = localItem.some(a => a.id === item.id);
             <span className="text-blue-600">{showCard.developer}</span>
           </p>
 
-          {/* Stats */}
+   
           <div className="flex gap-10 mt-5 text-lg">
             <div>
               <p className="font-bold">{showCard.downloads}</p>
@@ -119,7 +119,7 @@ const alreadyInstalled = localItem.some(a => a.id === item.id);
             </div>
           </div>
 
-          {/* Install Button */}
+
           <button
             onClick={handleInstall}
             disabled={isInstalled}
@@ -145,8 +145,10 @@ const alreadyInstalled = localItem.some(a => a.id === item.id);
 
 
       {/* ----- DESCRIPTION ----- */}
-      <h2 className="text-2xl font-medium mt-14 mb-3">Description</h2>
+     <div className="my-15">
+       <h2 className="text-2xl font-medium mb-3">Description</h2>
       <p className="text-gray-700 leading-7">{showCard.description}</p>
+     </div>
     </div>
   );
 };
