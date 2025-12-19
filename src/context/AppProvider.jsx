@@ -1,70 +1,62 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppContext } from "./AppContext";
 
 export const AppProvider = ({ children }) => {
-  const [showData, updateData] = useState([]);
+  const [showData, setShowData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ALWAYS store installed apps as an array
-  const [localItem, setLocalItem] = useState(() => {
-    const stored = localStorage.getItem("installApp");
-    return stored ? JSON.parse(stored) : [];  // <-- IMPORTANT: always array
+
+  const [installedIds, setInstalledIds] = useState(() => {
+    const stored = localStorage.getItem("apps");
+    return stored ? JSON.parse(stored).map(Number) : [];
   });
 
+  
   useEffect(() => {
     fetch("/appsData.json")
       .then((res) => res.json())
       .then((data) => {
-        updateData(data);
+        setShowData(data);
         setLoading(false);
-        console.log(data)
       })
-      .catch(() => {
-        console.log("Error fetching appsData.json");
-        setLoading(false);
-      });
+      .catch(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("installApp", JSON.stringify(localItem));
-  }, [localItem]);
+    localStorage.setItem("apps", JSON.stringify(installedIds));
+  }, [installedIds]);
 
-
-const installApp = (installAppData) => {
-
-  const existing = Array.isArray(localItem) ? localItem : [];
-
-  const alreadyInstalled = existing.some(
-    (a) => a.id === installAppData.id
-  );
-
-  if (!alreadyInstalled) {
-    const updated = [...existing, installAppData];
-    setLocalItem(updated);
-
-  }
-};
-
-const uninstallApp = (id) => {
-  const existing = Array.isArray(localItem) ? localItem : [];
-
-  const updated = existing.filter(app => app.id !== id);
-
-  setLocalItem(updated);
-
-};
-
- 
-  const dataInfo = {
-    showData,
-    loading,
-    installApp,
-    localItem,
-      uninstallApp,  
+  const installApp = (id) => {
+    const numericId = Number(id);
+    setInstalledIds((prev) =>
+      prev.includes(numericId) ? prev : [...prev, numericId]
+    );
   };
 
+  
+  const uninstallApp = (id) => {
+    const numericId = Number(id);
+    setInstalledIds((prev) =>
+      prev.filter((appId) => appId !== numericId)
+    );
+  };
+
+
+  const installedApps = showData.filter((app) =>
+    installedIds.includes(app.id)
+  );
+
   return (
-    <AppContext.Provider value={dataInfo}>
+    <AppContext.Provider
+      value={{
+        showData,
+        loading,
+        installApp,
+        uninstallApp,
+        installedIds,
+        installedApps,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

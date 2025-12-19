@@ -33,9 +33,24 @@ export const TrendingData = () => {
  
  
 </div>
-<div className="w-11/12 mx-auto flex justify-center my-10 ">
-  <Link to="Apps" className="btn">Show All</Link>
+<div className="w-11/12 mx-auto flex justify-center my-10">
+  <Link
+    to="Apps"
+    className="
+      px-10 py-3
+      rounded-lg
+      font-semibold
+      text-white
+      bg-gradient-to-r from-purple-600 to-purple-500
+      hover:from-purple-700 hover:to-purple-600
+      transition-all duration-300
+      shadow-md
+    "
+  >
+    Show All
+  </Link>
 </div>
+
 
  </>
   )

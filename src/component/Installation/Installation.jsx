@@ -1,69 +1,156 @@
-import React, { use, useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
+import { Download, Star } from "lucide-react";
+import { FcRating } from "react-icons/fc";
+
+
+
+
+
+
+
+
+const images = import.meta.glob(
+  "../../assets/app-logo/*",
+  { eager: true }
+);
+
+const getImageSrc = (id) => {
+  const fileNumber = String(id + 4).padStart(3, "0");
+  const match = Object.entries(images).find(([path]) =>
+    path.includes(`icon-${fileNumber}`)
+  );
+  return match?.[1]?.default || null;
+};
+
+
+const parseSize = (value) => {
+  if (!value) return 0;
+  return Number(value); 
+};
+
+
+
+
+
+
 
 export const Installation = () => {
-  const { localItem, uninstallApp } = use(AppContext);
+  const { installedApps, uninstallApp } = useContext(AppContext);
+  const [sortBy, setSortBy] = useState("");
+ const [loading, setLoading] = useState(true);
 
-  const [sortBy, setSortBy] = useState(""); 
 
-  if (!localItem || localItem.length === 0) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
+  if (loading) {
     return (
-      <div className="w-10/12 mx-auto mt-10 text-center text-gray-500">
+      <div className="min-h-screen flex items-center justify-center bg-[#f1f1f1]">
+        <span className="loading loading-spinner loading-xl"></span>
+      </div>
+    );
+  }
+  if (!installedApps || installedApps.length === 0) {
+    return (
+      <div className="text-center mt-20 text-gray-500">
         No apps installed yet.
       </div>
     );
   }
 
-
-  const sortedApps = [...localItem].sort((a, b) => {
-    if (sortBy === "high-low") return b.downloads - a.downloads; 
-    if (sortBy === "low-high") return a.downloads - b.downloads; 
+  const sortedApps = [...installedApps].sort((a, b) => {
+    if (sortBy === "size-high-low")
+      return parseSize(b.size) - parseSize(a.size);
+    if (sortBy === "size-low-high")
+      return parseSize(a.size) - parseSize(b.size);
     return 0;
   });
 
   return (
-    <div className="w-10/12 mx-auto my-10">
-      <h1 className="text-3xl font-semibold mb-6">Installed Apps</h1>
+    <div className="bg-[#f1f1f1] min-h-screen py-12">
+      <div className="w-10/12 mx-auto">
 
+       
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 flex items-center justify-center gap-2">
+            Your Installed Apps
+  
+          </h1>
+          <p className="text-gray-500 mt-2">
+            Explore All Trending Apps on the Market developed by us
+          </p>
+        </div>
 
-      <div className="mb-6 flex justify-end">
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="border p-2 rounded-lg shadow bg-white"
-        >
-          <option value="">Sort by Downloads</option>
-          <option value="high-low">High → Low</option>
-          <option value="low-high">Low → High</option>
-        </select>
-      </div>
+   
+        <div className="flex justify-between items-center mb-6">
+          <p className="text-purple-600 font-semibold underline">
+            {installedApps.length} Apps Found
+          </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {sortedApps.map((app) => (
-          <div key={app.id} className="p-5 border rounded-lg shadow bg-white">
-            <div className="flex gap-4 items-center">
-              <img
-                src={app.image}
-                alt={app.title}
-                className="w-20 h-20 rounded-xl"
-              />
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border px-4 py-2 rounded-md bg-white shadow"
+          >
+            <option value="">Sort By Size</option>
+            <option value="size-high-low">Size: High → Low</option>
+            <option value="size-low-high">Size: Low → High</option>
+          </select>
+        </div>
 
-              <div className="flex-1">
-                <h2 className="text-xl font-semibold">{app.title}</h2>
-                <p className="text-gray-500 text-sm">
-                  Downloads: {app.downloads}
-                </p>
+       
+        <div className="space-y-4">
+          {sortedApps.map((app) => (
+            <div
+              key={app.id}
+              className="bg-white rounded-xl shadow-sm px-6 py-4 flex items-center justify-between"
+            >
+      
+              <div className="flex items-center gap-5">
+                <img
+                  src={getImageSrc(app.id)}
+                  alt={app.title}
+                  className="w-16 h-16 rounded-xl object-cover"
+                />
+
+                <div>
+                  <h2 className="font-semibold text-lg text-gray-800">
+                    {app.title}
+                  </h2>
+
+                  <div className="flex items-center gap-4 mt-1 text-sm">
+                    <span className="text-green-600 flex items-center gap-1">
+                      <Download className="w-4"></Download> {app.downloads}
+                    </span>
+
+                    <span className="text-purple-600 flex items-center gap-1">
+                      <Star className="w-4"></Star> {app.ratingAvg}
+                    </span>
+
+                    <span className="text-gray-500">
+                      {app.size} MB
+                    </span>
+                  </div>
+                </div>
               </div>
 
+          
               <button
                 onClick={() => uninstallApp(app.id)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold"
               >
                 Uninstall
               </button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

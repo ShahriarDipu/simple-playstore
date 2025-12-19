@@ -1,3 +1,4 @@
+import { Download, Star } from 'lucide-react';
 import React from 'react'
 import { Link } from 'react-router'
 const images = import.meta.glob('../../assets/app-logo/*', { eager: true });
@@ -33,25 +34,13 @@ export const AppsCard = ({appsCard}) => {
 
     <div className="flex justify-between items-center mt-3 text-sm">
       <span className="flex items-center gap-1 text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 7l4 4L20 3"
-          />
-        </svg>
+      
+         <Download className="w-4"></Download>
         {size}
       </span>
 
       <span className="flex items-center gap-1 text-purple-600 bg-purple-100 px-2 py-0.5 rounded-full">
-        ⭐ {ratingAvg}
+        <Star className="w-4"></Star>{ratingAvg}
       </span>
     </div>
   </div>

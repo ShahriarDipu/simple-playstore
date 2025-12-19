@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router'
 import logo from "../../assets/logo.png"
+import { Github } from 'lucide-react'
 
 export const Header = () => {
 
@@ -38,8 +39,28 @@ export const Header = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a href='https://github.com/ShahriarDipu' className="btn">Contribute</a>
-  </div>
+  <a
+    href="https://github.com/ShahriarDipu"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="
+      flex items-center gap-2
+      px-6 py-2
+      rounded-lg
+      text-white font-semibold
+      bg-gradient-to-r from-indigo-500 to-purple-500
+      hover:from-indigo-600 hover:to-purple-600
+      transition-all duration-300
+      shadow-md
+    "
+  >
+    
+    <Github></Github>
+
+    Contribute
+  </a>
+</div>
+
 </div>
 
 

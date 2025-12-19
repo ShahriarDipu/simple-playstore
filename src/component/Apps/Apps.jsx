@@ -51,7 +51,7 @@ export const Apps = () => {
   return (
     <div className='w-15/17 mx-auto my-10'>
 
-      <div className='mb-6 flex justify-center'>
+      <div className='mb-10 flex justify-center'>
         <input
           type="text"
           placeholder="Search apps..."
