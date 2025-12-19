@@ -25,7 +25,7 @@ export const Hero = () => {
       <div className="flex gap-4 mt-6 flex-wrap justify-center">
    
         <a
-          href="#"
+          href="https://play.google.com"
           className="flex items-center gap-2 bg-white shadow-lg rounded-xl px-5 py-3 hover:scale-[1.05] transition"
         >
           <img
@@ -39,7 +39,7 @@ export const Hero = () => {
         </a>
 
         <a
-          href="#"
+          href="https://www.apple.com/ca/app-store/"
           className="flex items-center gap-2 bg-white shadow-lg rounded-xl px-5 py-3 hover:scale-[1.05] transition"
         >
           <img
