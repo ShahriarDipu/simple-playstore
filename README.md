@@ -1,6 +1,6 @@
-# 📱 AppVerse
+# Hero.io
 
-AppVerse is a modern, responsive web application that showcases popular apps in a clean app-store–style interface. Users can browse apps, search in real time, view detailed app information, install apps using localStorage, and manage their installed apps seamlessly.
+Hero.io is a modern, responsive web application that showcases popular apps in a clean app-store–style interface. Users can browse apps, search in real time, view detailed app information, install apps using localStorage, and manage their installed apps seamlessly.
 
 ---
 

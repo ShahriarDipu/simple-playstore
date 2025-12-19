@@ -16,15 +16,15 @@ children:[
         index:true, Component:Home,
     },
     {
-        path:"Apps",
+        path:"/Apps",
         Component:Apps
     },
     {
-        path:"Installation",
+        path:"/Installation",
         Component:Installation
     },
     {
-        path:"Apps",
+        path:"/Apps",
         Component:Apps
     },{
         path:"/CardDetails/:id",

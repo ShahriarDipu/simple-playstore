@@ -17,6 +17,9 @@ export const AppsCard = ({appsCard}) => {
   return (
     <Link to={`/CardDetails/${id}`}>
    <div className="card w-72 bg-white shadow-md rounded-xl overflow-hidden cursor-pointer transition hover:shadow-lg">
+  
+  
+  
   <figure className="h-52 w-full bg-gray-50 flex items-center justify-center">
     {imageSrc ? (
       <img

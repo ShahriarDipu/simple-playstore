@@ -1,18 +1,37 @@
 import React from 'react'
-import { NavLink } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import logo from "../../assets/logo.png"
 import { Github } from 'lucide-react'
 
 export const Header = () => {
 
-      const links=<div className=' md:flex gap-6'>
-        <li><NavLink to="/">Home
-            </NavLink></li>
-               <li><NavLink to="Apps">Apps
-            </NavLink></li>
-               <li><NavLink to="Installation">Installation
-            </NavLink></li>
-      </div>
+const navLinkClass = ({ isActive }) =>
+  isActive
+    ? "text-indigo-600 font-semibold "
+    : "text-gray-600 hover:text-indigo-600 transition";
+
+const links = (
+  <div className="md:flex gap-6">
+    <li>
+      <NavLink to="/" className={navLinkClass}>
+        Home
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/Apps" className={navLinkClass}>
+        Apps
+      </NavLink>
+    </li>
+
+    <li>
+      <NavLink to="/Installation" className={navLinkClass}>
+        Installation
+      </NavLink>
+    </li>
+  </div>
+);
+
 
   return (
     <div>
@@ -29,16 +48,17 @@ export const Header = () => {
        {links}
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">
-      <img className ="w-11" src={logo} alt="" />
-      HERO.IO</a>
+<Link to="/">
+    <a className="flex items-center">
+      <img className ="w-11 ml-3 mr-3" src={logo} alt="" />
+      HERO.IO</a></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
       {links}
     </ul>
   </div>
-  <div className="navbar-end">
+  <div className="navbar-end mr-4">
   <a
     href="https://github.com/ShahriarDipu"
     target="_blank"

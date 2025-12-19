@@ -4,6 +4,8 @@ import { Download, Star } from "lucide-react";
 import { FcRating } from "react-icons/fc";
 
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -142,16 +144,28 @@ export const Installation = () => {
               </div>
 
           
-              <button
-                onClick={() => uninstallApp(app.id)}
-                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold"
-              >
-                Uninstall
-              </button>
+           <button
+  onClick={() => {
+    uninstallApp(app.id);
+
+    toast.success(`${app.title} uninstalled successfully`, {
+      position: "top-right",
+      autoClose: 2000,
+      pauseOnHover: false,
+      theme: "light",
+    });
+  }}
+  className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold"
+>
+  Uninstall
+</button>
+
             </div>
           ))}
         </div>
       </div>
+      <ToastContainer />
+
     </div>
   );
 };
