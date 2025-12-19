@@ -6,7 +6,7 @@ import { FaArrowTrendUp } from "react-icons/fa6";
 
 export const TrendingData = () => {
    const {showData}=use(AppContext)
- const topData = showData.slice(0,9)
+ const topData = showData.slice(0,8)
  console.log(topData)
   return (
     <>
@@ -22,7 +22,7 @@ export const TrendingData = () => {
             <p>Explore All Trending Apps on the Market developed by us</p>
           </div>
     </div>
-<div className=' w-15/17 mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 my-15 '>
+<div className=' w-15/17 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 my-15 '>
 {
     topData.map(topData=>(<AppCard topData={topData}></AppCard>))
 }

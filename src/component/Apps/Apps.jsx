@@ -1,4 +1,4 @@
-import React, { use, useContext, useState } from 'react';
+import React, { use, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import { AppsCard } from '../AppsCard/AppsCard';
 
@@ -6,11 +6,32 @@ import { AppsCard } from '../AppsCard/AppsCard';
 export const Apps = () => {
   const { showData } = use(AppContext);
   const [searchText, setSearchText] = useState("");
+  const [loading, setLoading]=useState(true)
+
+    useEffect(() => {
+    if (showData) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 1000); 
+
+      return () => clearTimeout(timer); 
+    }
+  }, [showData]);
 
   // Filter apps based on search text
   const filteredApps = showData.filter(app =>
     app.title.toLowerCase().includes(searchText.toLowerCase())
+    
   );
+ 
+
+   if (loading) {
+    return (
+      <div className="min-h-[60vh] flex justify-center items-center">
+        <span className="loading loading-spinner loading-xl"></span>
+      </div>
+    );
+  }
 
   return (
     <div className='w-15/17 mx-auto my-10'>
