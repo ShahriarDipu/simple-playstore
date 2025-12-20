@@ -4,8 +4,8 @@ import { Download, Star } from "lucide-react";
 import { FcRating } from "react-icons/fc";
 
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 
 
 
@@ -61,7 +61,7 @@ export const Installation = () => {
   }
   if (!installedApps || installedApps.length === 0) {
     return (
-      <div className="text-center mt-20 text-gray-500">
+      <div className="text-center my-20 text-gray-500">
         No apps installed yet.
       </div>
     );
@@ -77,6 +77,7 @@ export const Installation = () => {
 
   return (
     <div className="bg-[#f1f1f1] min-h-screen py-12">
+    
       <div className="w-10/12 mx-auto">
 
        
@@ -164,7 +165,7 @@ export const Installation = () => {
           ))}
         </div>
       </div>
-      <ToastContainer />
+   
 
     </div>
   );
