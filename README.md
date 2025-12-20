@@ -32,7 +32,7 @@ Hero.io is a modern, responsive web application that showcases popular apps in a
 
 ## 🚀 Deployment
 
-The application is deployed on **Vercel / Netlify / Cloudflare**  
+The application is deployed on ** Cloudflare**  
 Supports route reloading without 404 errors.
 
 ---
@@ -41,3 +41,5 @@ Supports route reloading without 404 errors.
 
 **Shahriar Ahmed Dipu**  
 🔗 GitHub: https://github.com/ShahriarDipu
+
+LiveLink:   https://dipu.pages.dev
